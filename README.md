@@ -20,3 +20,8 @@ Options:
     -p, --pack          Pack afs file
     -h, --help          Print this help menu
 ```
+
+Acknowledgements
+----------------
+
+Shoutouts to NoThisIsStupider for collaboration in reverse engineering the AFS file format. Their AFS tool can be found [here](https://github.com/NoThisIsStupider/SA2-AFSTools).
