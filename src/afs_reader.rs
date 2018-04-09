@@ -58,12 +58,12 @@ impl<S> AfsReader<S>
     }
 
     pub fn open<'a>(&'a mut self, element: usize) -> Option<io::Result<AfsEntry<'a, S>>> {
+        let inner = &mut self.inner;
         self.files
             .get(element)
-            .map(|x| *x)
             .map(move |file| {
                 AfsEntry::new(
-                    &mut self.inner,
+                    inner,
                     file.offset as usize,
                     file.size)
             })
@@ -81,7 +81,7 @@ pub struct AfsEntry<'a, S>
 impl<'a, S> AfsEntry<'a, S>
     where S: Seek + Read
 {
-    fn new(file: &'a mut S, start: usize, length: usize) -> io::Result<AfsEntry<'a, S>> {
+    fn new(file: &mut S, start: usize, length: usize) -> io::Result<AfsEntry<S>> {
         file.seek(SeekFrom::Start(start as u64))?;
         Ok(AfsEntry {
             file: file,
