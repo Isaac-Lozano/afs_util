@@ -2,6 +2,8 @@ use std::io::{self, Seek, SeekFrom, Read};
 
 use byteorder::{LE, ReadBytesExt};
 
+const AFS_MAGIC: &[u8; 4] = b"AFS\x00";
+
 #[derive(Clone,Copy,Debug)]
 struct AfsFile {
     offset: u32,
@@ -36,7 +38,7 @@ impl<S> AfsReader<S>
 
         let mut magic = [0; 4];
         inner.read_exact(&mut magic)?;
-        if magic != *b"AFS\x00" {
+        if magic != *AFS_MAGIC {
             panic!("Bad magic");
         }
 
