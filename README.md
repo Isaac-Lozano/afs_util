@@ -13,7 +13,7 @@ Usage
 
 ```
 afs_util 0.1.0
-Usage: target/release/afs_util (-e|-p) INPUT OUTPUT
+Usage: afs_util (-e|-p) INPUT OUTPUT
 
 Options:
     -e, --extract       Extract afs file
